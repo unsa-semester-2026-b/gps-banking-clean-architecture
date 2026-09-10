@@ -21,4 +21,7 @@ export interface AccountRepository {
   save(account: Account): Promise<void>;
 
   findByNumber(number: AccountNumber): Promise<Account | null>;
+
+  findAll(): Promise<Account[]>;
 }
+
