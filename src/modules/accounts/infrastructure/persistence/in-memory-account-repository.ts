@@ -25,4 +25,12 @@ export class InMemoryAccountRepository implements AccountRepository {
     if (primitives === undefined) return null;
     return Account.fromPrimitives(primitives);
   }
+
+  async findAll(): Promise<Account[]> {
+    const list: Account[] = [];
+    for (const p of this.accounts.values()) {
+      list.push(Account.fromPrimitives(p));
+    }
+    return list;
+  }
 }

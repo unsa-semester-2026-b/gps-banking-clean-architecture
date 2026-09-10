@@ -2,6 +2,7 @@ import { join } from 'node:path';
 
 import { DepositMoneyUseCase } from '../modules/accounts/application/deposit-money.use-case';
 import { GetAccountUseCase } from '../modules/accounts/application/get-account.use-case';
+import { ListAccountsUseCase } from '../modules/accounts/application/list-accounts.use-case';
 import { OpenAccountUseCase } from '../modules/accounts/application/open-account.use-case';
 import { TransferMoneyUseCase } from '../modules/accounts/application/transfer-money.use-case';
 import { WithdrawMoneyUseCase } from '../modules/accounts/application/withdraw-money.use-case';
@@ -35,6 +36,7 @@ export const buildContainer = (): AccountsUseCases => {
   return {
     openAccount: new OpenAccountUseCase(accountRepository, accountNumberGenerator),
     getAccount: new GetAccountUseCase(accountRepository),
+    listAccounts: new ListAccountsUseCase(accountRepository),
     depositMoney: new DepositMoneyUseCase(accountRepository),
     withdrawMoney: new WithdrawMoneyUseCase(accountRepository),
     transferMoney: new TransferMoneyUseCase(accountRepository),

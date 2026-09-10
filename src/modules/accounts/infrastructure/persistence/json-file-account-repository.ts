@@ -30,6 +30,11 @@ export class JsonFileAccountRepository implements AccountRepository {
     return Account.fromPrimitives(primitives);
   }
 
+  async findAll(): Promise<Account[]> {
+    const accounts = await this.readAll();
+    return Object.values(accounts).map((p) => Account.fromPrimitives(p));
+  }
+
   private async readAll(): Promise<Record<string, AccountPrimitives>> {
     try {
       const content = await readFile(this.filePath, 'utf-8');
