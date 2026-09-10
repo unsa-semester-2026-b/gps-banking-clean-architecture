@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 
 import { DepositMoneyUseCase } from '../../application/deposit-money.use-case';
 import { GetAccountUseCase } from '../../application/get-account.use-case';
+import { ListAccountsUseCase } from '../../application/list-accounts.use-case';
 import { OpenAccountUseCase } from '../../application/open-account.use-case';
 import { TransferMoneyUseCase } from '../../application/transfer-money.use-case';
 import { WithdrawMoneyUseCase } from '../../application/withdraw-money.use-case';
@@ -23,6 +24,7 @@ import { respondWithDomainError } from './http-error-map';
 export interface AccountsUseCases {
   openAccount: OpenAccountUseCase;
   getAccount: GetAccountUseCase;
+  listAccounts: ListAccountsUseCase;
   depositMoney: DepositMoneyUseCase;
   withdrawMoney: WithdrawMoneyUseCase;
   transferMoney: TransferMoneyUseCase;
@@ -52,6 +54,14 @@ export const buildAccountsRouter = (useCases: AccountsUseCases): Router => {
       });
       if (result.isLeft()) return respondWithDomainError(res, result.error);
       res.status(201).json(result.value);
+    }),
+  );
+
+  router.get(
+    '/accounts',
+    handle(async (_req, res) => {
+      const result = await useCases.listAccounts.execute();
+      res.status(200).json(result.value);
     }),
   );
 
