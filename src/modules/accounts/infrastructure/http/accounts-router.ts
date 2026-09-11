@@ -61,7 +61,11 @@ export const buildAccountsRouter = (useCases: AccountsUseCases): Router => {
     '/accounts',
     handle(async (_req, res) => {
       const result = await useCases.listAccounts.execute();
-      res.status(200).json(result.value);
+      if (result.isRight()) {
+        res.status(200).json(result.value);
+      } else {
+        res.status(200).json([]);
+      }
     }),
   );
 

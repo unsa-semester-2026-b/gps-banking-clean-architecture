@@ -9,7 +9,8 @@
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:arch": "depcruise src --config .dependency-cruiser.cjs"
+    "test:arch": "depcruise src --config .dependency-cruiser.cjs",
+    "arch:check": "depcruise src --config .dependency-cruiser.cjs"
   },
   "dependencies": {
     "express": "^4.19.2"
